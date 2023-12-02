@@ -6,12 +6,12 @@ description text
 
 create table if not exists genres_artists (
 artist_id serial primary key,
-genre_id varchar(60) not null,
-number integer not null
-);
+genre_id varchar(60) not null
+)
 
 create table if not exists artist (
-artist_id varchar(80) primary key
+artist_id serial primary key,
+artist_name varchar(60) not null
 );
 
 create table if not exists album (
@@ -26,9 +26,11 @@ artist_id integer references artist(id),
 constraint pk primary key (artist_id, album_id)
 );
 
+
+
 create table if not exists song (
-sing_title varchar(80) primary key,
-song_duration varchar(40) not null,
+song_title serial primary key,
+foreign key (song) references album(album_id),
 album_id varchar(128) not null
 );
 
@@ -39,7 +41,6 @@ constraint pk primary key (song_id, collection_id)
 );
 
 create table if not exists collection (
-collection_year varchar(80) primary key,
-song_id varchar(40) not null,
-album_id varchar(128) not null
+collection_id serial primary key,
+song_id varchar(40) not null
 );
